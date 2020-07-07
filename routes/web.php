@@ -30,10 +30,18 @@ Route::post('/ticket/{slug?}/delete','TicketsController@destroy');
 Route::post('/comment', 'CommentsController@newComment');
 Route::get('users/register', 'Auth\RegisterController@showRegistrationForm');
 Route::post('users/register', 'Auth\RegisterController@register');
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('home', 'PagesController@home');
 Route::get('users/logout', 'Auth\LoginController@logout');
-Route::get('users/login', 'Auth\LoginController@showLoginForm');
+Route::get('users/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('users/login', 'Auth\LoginController@login');
+Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'manager'), function () {
+    Route::get('users', 'UsersController@index');
+    Route::get('users', [ 'as' => 'admin.user.index', 'uses' => 'UsersController@index']);
+    Route::get('roles', 'RolesController@index');
+    Route::get('roles/create', 'RolesController@create');
+    Route::post('roles/create', 'RolesController@store');
+    Route::get('users/{id?}/edit', 'UsersController@edit');
+    Route::post('users/{id?}/edit','UsersController@update');
+});

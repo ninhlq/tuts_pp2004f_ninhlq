@@ -15,9 +15,9 @@ class TicketsController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::all();
-
-        return view('tickets.index', compact('tickets'));
+        $users = User::all();
+        
+        return view('backend.users.index', compact('users'));
     }
 
     /**
@@ -89,7 +89,7 @@ class TicketsController extends Controller
         $ticket->title = $request->get('title');
         $ticket->content = $request->get('content');
 
-        if($request->get('status') != null) {
+        if ($request->get('status') != null) {
             $ticket->status = 0;
         } else {
             $ticket->status = 1;
@@ -98,7 +98,6 @@ class TicketsController extends Controller
 
         return redirect(action('TicketsController@edit', $ticket->slug))
         ->with('status', 'The ticket '.$slug.' has been updated!');
-    
     }
 
     /**
