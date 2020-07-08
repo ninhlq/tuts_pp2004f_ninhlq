@@ -22,9 +22,12 @@
                     Member
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    @if (Auth::check())
-                        <a class="dropdown-item" href="/users/logout">Logout</a>
-                    @else
+                        @if (Auth::check())
+                            @role('manager')
+                                <li><a href="/admin">Admin</a></li>
+                        @endrole
+                        <li><a href="/users/logout">Logout</a></li>
+                        @else
                         <a class="dropdown-item" href="/users/register">Register</a>
                         <a class="dropdown-item" href="/users/login">Login</a>
                     @endif
