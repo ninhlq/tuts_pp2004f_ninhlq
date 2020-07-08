@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -8,6 +9,15 @@ class Manager
 {
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if (!Auth::check()) {
+            return redirect('users/login');
+        } else {
+            $user = Auth::user();
+            if ($user->hasRole('manager')) {
+                return $next($request);
+            } else {
+                return redirect('/');
+            }
+        }
     }
 }
