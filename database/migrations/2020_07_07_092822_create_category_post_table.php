@@ -14,9 +14,12 @@ class CreateCategoryPostTable extends Migration
     public function up()
     {
         Schema::create('category_post', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
-            $table->integer('post_id')->unsigned()->index();
-            $table->integer('category_id')->unsigned()->index();
+            $table->increments('id')
+            ->unsigned();
+            $table->integer('post_id')
+            ->unsigned()->index();
+            $table->integer('category_id')
+            ->unsigned()->index();
             $table->timestamps();
 
             $table->foreign('category_id')
