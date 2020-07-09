@@ -47,7 +47,8 @@ class TicketsController extends Controller
 
         $ticket->save();
 
-        return redirect('/contact')->with('status', 'Your ticket has been created! Its unique id is: '.$slug);
+        return redirect('/contact')
+        ->with('status', 'Your ticket has been created! Its unique id is: '.$slug);
     }
 
     /**
@@ -110,6 +111,7 @@ class TicketsController extends Controller
     {
         $ticket = Ticket::whereSlug($slug)->firstOrFail();
         $ticket->delete();
-        return redirect('/tickets')->with('status', 'The ticket '.$slug.' has been deleted!');
+        return redirect('/tickets')
+        ->with('status', 'The ticket '.$slug.' has been deleted!');
     }
 }

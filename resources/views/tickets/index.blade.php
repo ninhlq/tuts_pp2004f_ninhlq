@@ -17,6 +17,7 @@
             @if ($tickets->isEmpty())
             <p> There is no ticket.</p>
             @else
+            
             <table class="table">
                 <thead>
                     <tr>
